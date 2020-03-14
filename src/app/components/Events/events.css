@@ -1,0 +1,76 @@
+.Events {
+  width: 380px;
+  height: 100vh;
+  border-right: 1px solid #dedede;
+  overflow-y: auto;
+}
+
+.header {
+  padding: 20px;
+}
+
+.header .logo {
+  margin: 0;
+}
+
+.logo .green {
+  color: #39b980;
+}
+
+.event-items {
+  margin: 0;
+  padding: 0 20px;
+  list-style: none;
+}
+
+.event-items .item {
+
+}
+
+.event {
+  border-top: 1px solid #dedede;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  display: block;
+  text-decoration: none;
+  color: #222222;
+}
+
+.event:hover {
+  /* font-weight: 500; */
+}
+
+.event.active {
+  border-top: 4px solid #39b980;
+  font-weight: 500;
+}
+
+.event .event-img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+.event .comment {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
