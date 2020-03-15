@@ -21,13 +21,14 @@ class Map extends React.Component {
     }
 
     render() {
-        const markers = eventsFromApi.map((event) => {
+        const markers = eventsFromApi.map((event, index) => {
             const { lng, lat, comment } = event;
             return (
                 <Marker
                     name={"fef"}
                     position={{ lat, lng }}
                     onClick={this.onMarkerClick}
+                    key={index}
                 >
                     {this.state.selectedPlace &&
                         <InfoWindow

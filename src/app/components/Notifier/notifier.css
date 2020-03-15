@@ -1,0 +1,8 @@
+.notify{
+  padding: 10px;
+  text-align: center;
+}
+
+.danger{
+  background-color: #f50057;
+}

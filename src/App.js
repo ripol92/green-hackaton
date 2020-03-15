@@ -2,16 +2,65 @@ import React from 'react';
 import './App.css';
 import Map from "./app/components/Map";
 import Grid from '@material-ui/core/Grid';
-import Header from "./app/components/Header";
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import Events from './app/components/Events/Events';
+import Notifier from './app/components/Notifier/Notifier';
+import ClCamera from './app/components/ClCamera/ClCamera';
 
 class App extends React.Component {
   constructor(props) {
     super();
+
+    this.state = {
+      open: false,
+      offline: false
+    }
+
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleSend = this.handleSend.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('online', () => {
+      this.setState({ offline: false });
+    });
+
+    window.addEventListener('offline', () => {
+      this.setState({ offline: true });
+    });
+  }
+
+  componentDidUpdate() {
+    let offlineStatus = !navigator.onLine;
+    if (this.state.offline !== offlineStatus) {
+      this.setState({ offline: offlineStatus });
+    }
+  }
+
+  handleOpen() {
+    this.setState({
+      open: true
+    })
+  };
+
+  handleClose() {
+    this.setState({
+      open: false
+    })
+  };
+
+  handleSend() {
+    console.log('send');
   }
 
   render() {
@@ -51,9 +100,43 @@ class App extends React.Component {
           </Grid>
         </Grid>
 
-        <IconButton color="white" variant="primary" className="add-photo-button" aria-label="add a photo">
+        <IconButton
+          color="secondary"
+          onClick={this.handleOpen}
+          variant="primary"
+          className="add-photo-button"
+          aria-label="add a photo">
           <PhotoCamera />
         </IconButton>
+
+        <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">Нашли мусор?</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Проявите социальную ответственность - сфоткайте и отправьте нам.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Комментарий"
+              type="text"
+              fullWidth
+              multiline
+            />
+
+            <Notifier offline={this.state.offline} />
+            <ClCamera offline={this.state.offline} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={this.handleSend} color="primary">
+              Send
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }
