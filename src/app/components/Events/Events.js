@@ -16,9 +16,9 @@ class Events extends Component {
   toggle(index, event) {
     this.setState({
       eventID: index
-    })
-
-    console.log(event)
+    }, () => {
+       this.props.onEventClick(event)
+    });
   }
 
   render() {
@@ -33,7 +33,7 @@ class Events extends Component {
                 }`} >
               <p className="comment">{item.comment}</p>
               {
-                this.state.eventID === index ? <img src={item.pathToPhoto} className="event-img" alt="event-img" /> : <></>
+                this.state.eventID === index ? <img src={item.file_link} className="event-img" alt="event-img" /> : <></>
               }
             </a>
           </li>
