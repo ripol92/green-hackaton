@@ -3,6 +3,9 @@ import './App.css';
 import Map from "./app/components/Map";
 import Grid from '@material-ui/core/Grid';
 import Header from "./app/components/Header";
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
 import Events from './app/components/Events/Events';
 
@@ -37,16 +40,20 @@ class App extends React.Component {
     ];
 
     return (
-      <div>
-        <Header />
+      <div className="App">
+        {/* <Header /> */}
         <Grid container>
-          <Grid item xs={4} md={4} xl={4}>
+          <Grid item xs={4} md={4} xl={3}>
             <Events eventItems={eventItems} />
           </Grid>
-          <Grid item xs={8} md={8} xl={8}>
+          <Grid item xs={8} md={8} xl={9}>
             <Map />
           </Grid>
         </Grid>
+
+        <IconButton color="white" variant="primary" className="add-photo-button" aria-label="add a photo">
+          <PhotoCamera />
+        </IconButton>
       </div>
     );
   }
