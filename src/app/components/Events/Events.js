@@ -33,7 +33,7 @@ class Events extends Component {
                 }`} >
               <p className="comment">{item.comment}</p>
               {
-                this.state.eventID === index ? <img src={item.file_link} className="event-img" alt="event-img" /> : <></>
+                this.state.eventID === index ? <img src={item.file_link} onClick={this.handleImageClick(item.file_link)} className="event-img" alt="event-img" /> : <></>
               }
             </a>
           </li>
@@ -53,6 +53,10 @@ class Events extends Component {
       </div>
     )
   }
+
+    handleImageClick(file_link) {
+    
+    }
 }
 
 export default Events;
