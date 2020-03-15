@@ -3,7 +3,6 @@ import './App.css';
 import Map from "./app/components/Map";
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -22,9 +21,11 @@ class App extends React.Component {
 
     this.state = {
       open: false,
-      offline: false
-    }
+      offline: false,  
+      selectedLocation: null
+    };
 
+    this.onEventClick = this.onEventClick.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleSend = this.handleSend.bind(this);
@@ -67,24 +68,24 @@ class App extends React.Component {
     const eventItems = [
       {
         id: 0,
-        comment: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry`s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-        longitude: '66.656566',
-        latitude: '38.112544',
-        pathToPhoto: 'https://c8.alamy.com/comp/AWTJNP/recycling-bins-and-a-gabage-can-in-hong-kong-AWTJNP.jpg',
+        comment: 'It seems this should not be #environment',
+        lng: '66.656566',
+        lat: '38.112544',
+        file_link: 'https://c8.alamy.com/comp/AWTJNP/recycling-bins-and-a-gabage-can-in-hong-kong-AWTJNP.jpg',
       },
       {
         id: 1,
-        comment: 'Lorem Ipsum has been the industry`s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+        comment: 'A lot of garbage near my house. It spoils the environment and my health',
         longitude: '66.656566',
         latitude: '38.112544',
-        pathToPhoto: 'https://marketplace.canva.com/MADat-cj3_Q/1/thumbnail_large-1/canva-a-wooden-gabage-bin-full%2C-outdoors.-MADat-cj3_Q.jpg',
+        file_link: 'https://marketplace.canva.com/MADat-cj3_Q/1/thumbnail_large-1/canva-a-wooden-gabage-bin-full%2C-outdoors.-MADat-cj3_Q.jpg',
       },
       {
         id: 2,
-        comment: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+        comment: 'Horror, soon it will not be possible to live here at all, so much garbage',
         longitude: '66.656566',
         latitude: '38.112544',
-        pathToPhoto: 'https://previews.123rf.com/images/joey333/joey3331804/joey333180400018/99911689-gabage-in-thailand-river-after-loy-kratong-night-festival.jpg',
+        file_link: 'https://previews.123rf.com/images/joey333/joey3331804/joey333180400018/99911689-gabage-in-thailand-river-after-loy-kratong-night-festival.jpg',
       },
     ];
 
@@ -93,10 +94,10 @@ class App extends React.Component {
         {/* <Header /> */}
         <Grid container>
           <Grid item xs={4} md={4} xl={3}>
-            <Events eventItems={eventItems} />
+            <Events eventItems={eventItems} onEventClick={this.onEventClick}/>
           </Grid>
           <Grid item xs={8} md={8} xl={9}>
-            <Map />
+            <Map selectedLocation = {this.state.selectedLocation}/>
           </Grid>
         </Grid>
 
@@ -139,6 +140,12 @@ class App extends React.Component {
         </Dialog>
       </div>
     );
+  }
+
+  onEventClick(event){
+    this.setState({
+      selectedPlace: event
+    })
   }
 }
 
