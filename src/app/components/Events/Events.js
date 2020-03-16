@@ -17,7 +17,7 @@ class Events extends Component {
     this.setState({
       eventID: index
     }, () => {
-       this.props.onEventClick(event)
+      this.props.onEventClick(event)
     });
   }
 
@@ -31,9 +31,14 @@ class Events extends Component {
               className={`event ${
                 this.state.eventID === index ? "active" : ""
                 }`} >
-              <p className="comment">{item.comment}</p>
+              <p className={`comment ${this.state.eventID === index ? "show" : ""}`}>{item.comment}</p>
+
               {
-                this.state.eventID === index ? <img src={item.file_link} className="event-img" alt="event-img" /> : <></>
+                this.state.eventID === index ?
+                  <img src={item.file_link} className="event-img" alt="event-img" /> :
+                  <div className="img-preview-content">
+                    <img src={item.file_link} className="event-img" alt="event-img" />
+                  </div>
               }
             </a>
           </li>
@@ -43,7 +48,7 @@ class Events extends Component {
     return (
       <div className="Events">
         <div className="header">
-          <h1 className="logo"><span className="green">Clean</span> City</h1>
+          <h2 className="logo"><span className="green">Clean</span> City</h2>
         </div>
         <div className="events">
           <ul className="event-items">
