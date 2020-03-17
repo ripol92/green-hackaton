@@ -4,34 +4,24 @@ import Map from "./app/components/Map";
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import {Button} from '@material-ui/core';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { makeStyles } from '@material-ui/core/styles';
 import Events from './app/components/Events/Events';
-import {Camera} from "@material-ui/icons";
+import AddEventDialog from "./app/components/AddEventDialog";
 
 
 class App extends React.Component {
   constructor(props) {
-    super();
+    super(props);
 
     this.state = {
-      open: false,
-      offline: false,  
+      offline: false,
       selectedLocation: null,
-      photo: null
+      photo: null,
+      addEventDialogOpen: false
     };
 
     this.onEventClick = this.onEventClick.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.handleSend = this.handleSend.bind(this);
-    this.handleCameraChange = this.handleCameraChange.bind(this);
   }
 
   componentDidMount() {
@@ -47,18 +37,20 @@ class App extends React.Component {
 
   handleOpen() {
     this.setState({
-      open: true
+      addEventDialogOpen: true
     })
   };
 
   handleClose() {
     this.setState({
-      open: false
+      addEventDialogOpen: false
     })
   };
 
-  handleSend() {
-    console.log('send');
+  onEventClick(event) {
+    this.setState({
+      selectedLocation: event
+    })
   }
 
   render() {
@@ -66,22 +58,22 @@ class App extends React.Component {
       {
         id: 0,
         comment: 'It seems this should not be #environment',
-        lng: '66.656566',
-        lat: '38.112544',
+        lat: 38.573300,
+        lng: 68.404420,
         file_link: 'https://c8.alamy.com/comp/AWTJNP/recycling-bins-and-a-gabage-can-in-hong-kong-AWTJNP.jpg',
       },
       {
         id: 1,
         comment: 'A lot of garbage near my house. It spoils the environment and my health',
-        longitude: '66.656566',
-        latitude: '38.112544',
+        lat: 38.674029,
+        lng: 68.874320,
         file_link: 'https://marketplace.canva.com/MADat-cj3_Q/1/thumbnail_large-1/canva-a-wooden-gabage-bin-full%2C-outdoors.-MADat-cj3_Q.jpg',
       },
       {
         id: 2,
         comment: 'Horror, soon it will not be possible to live here at all, so much garbage',
-        longitude: '66.656566',
-        latitude: '38.112544',
+        lat: 38.823331,
+        lng: 68.775570,
         file_link: 'https://previews.123rf.com/images/joey333/joey3331804/joey333180400018/99911689-gabage-in-thailand-river-after-loy-kratong-night-festival.jpg',
       },{
         id: 3,
@@ -102,16 +94,23 @@ class App extends React.Component {
         latitude: '38.112544',
         file_link: 'http://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.brookings.edu%2Fwp-content%2Fuploads%2F2016%2F06%2Fwildfire001.jpg&imgrefurl=https%3A%2F%2Fwww.brookings.edu%2Fmulti-chapter-report%2Fthe-year-that-shook-the-rich-a-review-of-natural-disasters-in-2011%2F&tbnid=mMiXM4na8jp1GM&vet=12ahUKEwjlmY_zspzoAhVnHpoKHUXSCT0QMygCegUIARDUAQ..i&docid=5nu3e4K5RByWpM&w=3500&h=2080&q=disasters&ved=2ahUKEwjlmY_zspzoAhVnHpoKHUXSCT0QMygCegUIARDUAQ',
       },
+      {
+        id: 3,
+        comment: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry`s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+        lat: 39.823352,
+        lng: 69.775591,
+        file_link: 'https://c8.alamy.com/comp/AWTJNP/recycling-bins-and-a-gabage-can-in-hong-kong-AWTJNP.jpg',
+      },
     ];
     return (
       <div className="App">
         {/* <Header /> */}
         <Grid container>
-          <Grid item xs={4} md={4} xl={3}>
-            <Events eventItems={eventItems} onEventClick={this.onEventClick}/>
+          <Grid item xs={12} md={4} xl={3}>
+            <Events eventItems={eventItems} onEventClick={this.onEventClick} />
           </Grid>
-          <Grid item xs={8} md={8} xl={9}>
-            <Map selectedLocation = {this.state.selectedLocation}/>
+          <Grid item xs={12} md={8} xl={9}>
+            <Map selectedLocation={this.state.selectedLocation} locations={eventItems} />
           </Grid>
         </Grid>
 
@@ -123,52 +122,11 @@ class App extends React.Component {
           aria-label="add a photo">
           <PhotoCamera />
         </IconButton>
-
-        <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Что то портит вашу экологию?</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Проявите социальную ответственность - сфотографируйте и отправьте нам.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Комментарий"
-              type="text"
-              fullWidth
-              multiline
-            />
-
-            <input type="file"
-                   accept="image/*"
-                   capture="camera"
-                   id={"camera-photo"}
-                   style={{display: "none"}}
-                   ref={cameraFile => this.cameraFile = cameraFile}
-                   onChange={this.handleCameraChange}/>
-            <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                onClick={() => this.cameraFile.click()}
-                startIcon={<Camera/>}
-            >
-              Сфотографировать
-            </Button>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.handleSend} color="primary">
-              Send
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <AddEventDialog open={this.state.addEventDialogOpen} onClose={this.handleClose}/>
       </div>
     );
   }
+
 
   onEventClick(event){
     this.setState({
@@ -176,11 +134,6 @@ class App extends React.Component {
     })
   }
 
-  handleCameraChange(event) {
-    this.setState({
-      photo: event.target.files[0]
-    })
-  }
 }
 
 export default App;
