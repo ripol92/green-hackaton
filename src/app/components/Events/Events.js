@@ -35,9 +35,9 @@ class Events extends Component {
 
               {
                 this.state.eventID === index ?
-                  <img src={item.file_link} className="event-img" alt="event-img" /> :
+                  <img src={item.image_link} className="event-img" alt="event-img" /> :
                   <div className="img-preview-content">
-                    <img src={item.file_link} className="event-img" alt="event-img" />
+                    <img src={item.image_link} className="event-img" alt="event-img" />
                   </div>
               }
             </a>

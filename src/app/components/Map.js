@@ -3,63 +3,7 @@ import { withGoogleMap, withScriptjs, GoogleMap, Marker, InfoWindow } from "reac
 import EventDetailDialog from "./EventDetailDialog";
 import Button from '@material-ui/core/Button';
 
-const eventsFromApi = [
-    { id: Math.random().toString(36).substring(7), lat: 38.573300, lng: 68.404420, comment: "Comment", photoUrl: "https://images.unsplash.com/photo-1536084577616-ea0e7911a977?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" },
-    { id: Math.random().toString(36).substring(7), lat: 38.674029, lng: 68.874320, comment: "Another text", photoUrl: "https://images.unsplash.com/photo-1531804055935-76f44d7c3621?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823331, lng: 68.775570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823341, lng: 68.775510, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.824331, lng: 68.785570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.923331, lng: 68.725570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.825331, lng: 68.775579, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823431, lng: 68.275571, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.744331, lng: 68.755572, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.723334, lng: 68.235574, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.813331, lng: 68.805573, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { lat: 39.823331, lng: 68.125578, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.153381, lng: 68.135570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.773331, lng: 68.805570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823331, lng: 68.175570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823234, lng: 68.172170, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823457, lng: 68.510570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823331, lng: 68.15572, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823341, lng: 68.175340, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823356, lng: 68.186570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823312, lng: 68.175570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823391, lng: 68.175770, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823331, lng: 68.143570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823331, lng: 68.195570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823741, lng: 68.175570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823339, lng: 68.205570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.223312, lng: 68.915570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823999, lng: 68.149570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823331, lng: 68.175570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823410, lng: 68.789570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823335, lng: 68.479470, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823131, lng: 68.172270, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.825454, lng: 68.125570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823339, lng: 68.175550, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.824028, lng: 68.945570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.153331, lng: 68.651570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.703320, lng: 68.105570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.903331, lng: 68.925570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.832331, lng: 68.235570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823231, lng: 68.195570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.821031, lng: 68.177770, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823431, lng: 68.205570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823981, lng: 68.215570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823379, lng: 68.171580, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823379, lng: 68.215570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.923231, lng: 68.195570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.553313, lng: 68.175570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.123331, lng: 68.195570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823323, lng: 68.195570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.823339, lng: 68.175550, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.853331, lng: 68.175520, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-    { id: Math.random().toString(36).substring(7), lat: 38.843331, lng: 68.172570, comment: "UNDP ffff", photoUrl: "https://dynaimage.cdn.cnn.com/cnn/q_auto,h_600/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190808205502-23-week-in-photos-0809-restricted.jpg" },
-];
-
 class Map extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -84,18 +28,18 @@ class Map extends React.Component {
     }
 
     render() {
-        const markers = this.state.eventsFromApi.map((event, index) => {
-            const { lng, lat, comment, file_link } = event;
-
+        let locations = this.props.locations ? this.props.locations : [];
+        const markers = locations.map((event, index) => {
+            const { long, lat, comment, image_link } = event;
             return (
                 <Marker
                     key={index}
                     name={"fefe"}
-                    position={{ lat, lng }}
+                    position={{ lat, lng: long }}
                     onClick={this.onMarkerClick}
                 >
                     {(this.state.showingInfoWindow &&
-                        this.state.selectedLng === event.lng &&
+                        this.state.selectedLng === event.long &&
                         this.state.selectedLat === event.lat
                     ) &&
                         <InfoWindow
@@ -106,7 +50,7 @@ class Map extends React.Component {
                                 <p>
                                     {comment}
                                 </p>
-                                <img src={file_link} alt="garbage" style={{ maxWidth: '220px' }} />
+                                <img src={image_link} alt="garbage" style={{ maxWidth: '220px' }} />
                                 <hr />
                                 <Button color={"primary"}>
                                     Подробнее

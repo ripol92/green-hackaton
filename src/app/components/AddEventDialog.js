@@ -60,7 +60,7 @@ class AddEventDialog extends React.Component{
                         <Grid item xs={6} md={6}>
                             <InputLabel >Фотография</InputLabel>
                             <input type="file"
-                                   accept="image/*"
+                                   accept="image/jpg,image/png/image/gif"
                                    capture="camera"
                                    id={"camera-photo"}
                                    style={{display: "none", marginTop: "2px"}}
@@ -192,7 +192,7 @@ class AddEventDialog extends React.Component{
 
     send(){
         const formData = new FormData();
-        formData.append("file", this.state.photo);
+        formData.append("file", this.state.photo, this.state.photo.name);
         formData.append("long", this.state.lng);
         formData.append("lat", this.state.lat);
         formData.append("comment", this.state.comment);
