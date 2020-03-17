@@ -11,10 +11,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import { makeStyles } from '@material-ui/core/styles';
 import Events from './app/components/Events/Events';
-import Notifier from './app/components/Notifier/Notifier';
-import ClCamera from './app/components/ClCamera/ClCamera';
+import {Camera} from "@material-ui/icons";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -23,23 +23,19 @@ class App extends React.Component {
     this.state = {
       open: false,
       offline: false,  
-      selectedLocation: null
+      selectedLocation: null,
+      photo: null
     };
 
     this.onEventClick = this.onEventClick.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleSend = this.handleSend.bind(this);
+    this.handleCameraChange = this.handleCameraChange.bind(this);
   }
 
   componentDidMount() {
-    window.addEventListener('online', () => {
-      this.setState({ offline: false });
-    });
 
-    window.addEventListener('offline', () => {
-      this.setState({ offline: true });
-    });
   }
 
   componentDidUpdate() {
@@ -107,7 +103,6 @@ class App extends React.Component {
         file_link: 'http://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.brookings.edu%2Fwp-content%2Fuploads%2F2016%2F06%2Fwildfire001.jpg&imgrefurl=https%3A%2F%2Fwww.brookings.edu%2Fmulti-chapter-report%2Fthe-year-that-shook-the-rich-a-review-of-natural-disasters-in-2011%2F&tbnid=mMiXM4na8jp1GM&vet=12ahUKEwjlmY_zspzoAhVnHpoKHUXSCT0QMygCegUIARDUAQ..i&docid=5nu3e4K5RByWpM&w=3500&h=2080&q=disasters&ved=2ahUKEwjlmY_zspzoAhVnHpoKHUXSCT0QMygCegUIARDUAQ',
       },
     ];
-
     return (
       <div className="App">
         {/* <Header /> */}
@@ -130,10 +125,10 @@ class App extends React.Component {
         </IconButton>
 
         <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Нашли мусор?</DialogTitle>
+          <DialogTitle id="form-dialog-title">Что то портит вашу экологию?</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Проявите социальную ответственность - сфоткайте и отправьте нам.
+              Проявите социальную ответственность - сфотографируйте и отправьте нам.
             </DialogContentText>
             <TextField
               autoFocus
@@ -145,8 +140,22 @@ class App extends React.Component {
               multiline
             />
 
-            <Notifier offline={this.state.offline} />
-            <ClCamera offline={this.state.offline} />
+            <input type="file"
+                   accept="image/*"
+                   capture="camera"
+                   id={"camera-photo"}
+                   style={{display: "none"}}
+                   ref={cameraFile => this.cameraFile = cameraFile}
+                   onChange={this.handleCameraChange}/>
+            <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                onClick={() => this.cameraFile.click()}
+                startIcon={<Camera/>}
+            >
+              Сфотографировать
+            </Button>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
@@ -164,6 +173,12 @@ class App extends React.Component {
   onEventClick(event){
     this.setState({
       selectedPlace: event
+    })
+  }
+
+  handleCameraChange(event) {
+    this.setState({
+      photo: event.target.files[0]
     })
   }
 }
