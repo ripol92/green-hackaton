@@ -4,8 +4,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import TextField from "@material-ui/core/TextField";
-import {Button} from "@material-ui/core";
-import {Camera} from "@material-ui/icons";
+import { Button } from "@material-ui/core";
+import { Camera } from "@material-ui/icons";
 import CheckIcon from '@material-ui/icons/Check';
 import DialogActions from "@material-ui/core/DialogActions";
 import Axios from "axios";
@@ -16,7 +16,7 @@ import Grid from "@material-ui/core/Grid";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 
-class AddEventDialog extends React.Component{
+class AddEventDialog extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -56,38 +56,38 @@ class AddEventDialog extends React.Component{
                         onChange={this.handleCommentChange}
                     />
 
-                    <Grid container style={{marginTop: "5px"}}>
-                        <Grid item xs={6} md={6}>
+                    <Grid container style={{ marginTop: "5px" }}>
+                        <Grid item xs={12} sm={6} md={6}>
                             <InputLabel >Фотография</InputLabel>
                             <input type="file"
-                                   accept="image/jpg,image/png/image/gif"
-                                   capture="camera"
-                                   id={"camera-photo"}
-                                   style={{display: "none", marginTop: "2px"}}
-                                   ref={cameraFile => this.cameraFile = cameraFile}
-                                   onChange={this.handleCameraChange}/>
+                                accept="image/jpg,image/png/image/gif"
+                                capture="camera"
+                                id={"camera-photo"}
+                                style={{ display: "none", marginTop: "2px" }}
+                                ref={cameraFile => this.cameraFile = cameraFile}
+                                onChange={this.handleCameraChange} />
                             <Button
-                                style={{display: this.state.photoLoaded && "none", }}
+                                style={{ display: this.state.photoLoaded && "none", }}
                                 variant="contained"
                                 color="primary"
                                 size="small"
                                 onClick={() => this.cameraFile.click()}
-                                startIcon={<Camera/>}
+                                startIcon={<Camera />}
                             >
                                 Сфотографировать
                             </Button>
                             <Button
-                                style={{display: !this.state.photoLoaded && "none"}}
+                                style={{ display: !this.state.photoLoaded && "none" }}
                                 variant="contained"
                                 color="primary"
                                 size="small"
-                                startIcon={<CheckIcon/>}
+                                startIcon={<CheckIcon />}
                             >
                                 Загружено
                             </Button>
                         </Grid>
-                        <Grid item xs={6} md={6} style={{textAlign: "right"}}>
-                            <InputLabel id="demo-controlled-open-select-label" style={{marginRight: "37px"}}>Район</InputLabel>
+                        <Grid item xs={12} sm={6} md={6} className="region-grid">
+                            <InputLabel id="demo-controlled-open-select-label" style={{ marginRight: "37px" }}>Район</InputLabel>
                             <Select
                                 labelId="demo-controlled-open-select-label"
                                 id="demo-controlled-open-select"
@@ -176,12 +176,12 @@ class AddEventDialog extends React.Component{
     }
 
     handleSendClick() {
-        if(!navigator.geolocation.getCurrentPosition(this.handleLocation)){
+        if (!navigator.geolocation.getCurrentPosition(this.handleLocation)) {
             console.log("Пожалуйста, предоставьте свои геоданные ")
         };
     }
 
-    handleLocation(position){
+    handleLocation(position) {
         this.setState({
             lng: position.coords.longitude,
             lat: position.coords.latitude
@@ -190,26 +190,28 @@ class AddEventDialog extends React.Component{
         })
     }
 
-    send(){
-        const formData = new FormData();
-        formData.append("file", this.state.photo, this.state.photo.name);
-        formData.append("long", this.state.lng);
-        formData.append("lat", this.state.lat);
-        formData.append("comment", this.state.comment);
-        formData.append("district", this.state.district);
+    send() {
+        if (this.state.comment && this.state.district && this.state.photo) {
+            const formData = new FormData();
+            formData.append("file", this.state.photo, this.state.photo.name);
+            formData.append("long", this.state.lng);
+            formData.append("lat", this.state.lat);
+            formData.append("comment", this.state.comment);
+            formData.append("district", this.state.district);
 
-        Axios.post("http://cleancity.test/api/create_app", formData).then(resp => {
-            this.setState({
-                successToasterOpen: true
-            }, () => {
-                window.location.reload();
+            Axios.post("http://cleancity.test/api/create_app", formData).then(resp => {
+                this.setState({
+                    successToasterOpen: true
+                }, () => {
+                    window.location.reload();
+                })
+            }).catch(err => {
+                console.log(err);
+                this.setState({
+                    errorToasterOpen: true
+                })
             })
-        }).catch(err => {
-            console.log(err);
-            this.setState({
-                errorToasterOpen: true
-            })
-        })
+        }
     }
 
     handleCommentChange = (event) => {
@@ -224,7 +226,7 @@ class AddEventDialog extends React.Component{
         })
     }
 
-    handleSelectOpen = () =>{
+    handleSelectOpen = () => {
         this.setState({
             selectOpen: true
         })

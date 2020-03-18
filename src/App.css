@@ -12,6 +12,17 @@
   height: 100vh;
 }
 
+.region-grid {
+  text-align: right;
+}
+
+@media (max-width: 599px) {
+  .region-grid {
+    text-align: left !important;
+    margin-top: 20px !important;
+  }
+}
+
 @media (max-width: 767px) {
   .MyMapComponent {
     height: 50vh;
