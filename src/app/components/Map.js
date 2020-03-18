@@ -21,10 +21,14 @@ class Map extends React.Component {
     }
 
     componentWillReceiveProps(props) {
-        this.setState({
-            defaultZoomLat: props.selectedLocation && props.selectedLocation.lat,
-            defaultZoomLng: props.selectedLocation && props.selectedLocation.lng,
-        })
+        if (props.selectedLocation){
+            this.setState({
+                selectedLng: props.selectedLocation.lng,
+                selectedLat: props.selectedLocation.lat,
+                showingInfoWindow: true
+            })
+        }
+
     }
 
     render() {
@@ -64,7 +68,8 @@ class Map extends React.Component {
 
         const MyMapComponent = withScriptjs(withGoogleMap((props) =>
             <GoogleMap
-                defaultZoom={8}
+                defaultZoom={this.props.selectedLocation ? 12 : 8}
+                center={this.props.selectedLocation ? this.props.selectedLocation : {lat: 38.559547, lng: 68.757950}}
                 defaultCenter={{ lat: this.state.defaultZoomLat ? this.state.defaultZoomLat : 38.559547, lng: this.state.defaultZoomLng ? this.state.defaultZoomLng : 68.757950 }}
             >
                 {markers}

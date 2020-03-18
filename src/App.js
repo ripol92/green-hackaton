@@ -19,7 +19,8 @@ class App extends React.Component {
       photo: null,
       addEventDialogOpen: false,
       applications: null,
-      pagination: null
+      pagination: null,
+      selectedApplicationId: null
     };
 
     this.onEventClick = this.onEventClick.bind(this);
@@ -31,8 +32,30 @@ class App extends React.Component {
     Axios.get("http://cleancity.test/api/get_apps").then(resp => {
         this.setState({
           applications: resp.data.data
+        }, () => {
+          let urlString = window.location.href;
+          let urlStaged = urlString.replace('/', '');
+          let url = new URL(urlStaged);
+
+          const id = url.searchParams.get('id');
+          const applications = this.state.applications;
+          let selectedPosition = null;
+
+          for (let i = 0; i < applications.length; i++){
+            if (applications[i].id == id){
+              selectedPosition = applications[i]
+            }
+          }
+          if(selectedPosition){
+            this.setState({
+              selectedLocation: {lat: selectedPosition.lat, lng: selectedPosition.long}
+            })
+          }
+
         })
-    })
+    });
+
+
   }
 
   handleOpen() {
@@ -83,7 +106,16 @@ class App extends React.Component {
 
   onEventClick(event){
     this.setState({
-      selectedPlace: event
+      selectedPlace: event,
+      selectedLocation: {lat: event.lat, lng: event.long}
+    }, () => {
+      if ('URLSearchParams' in window) {
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set("id", event.id);
+        const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+        window.history.pushState(null, '', newRelativePathQuery);
+      }
+
     })
   }
 
