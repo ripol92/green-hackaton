@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 //   photo uri
 //   show or not show photo
 
-export default class EventDetailDialog extends React.Component<>{
+export default class EventDetailDialog extends React.Component {
     constructor(props) {
         super();
         this.handleClose = this.handleClose.bind(this);
