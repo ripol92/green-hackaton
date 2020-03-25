@@ -55,6 +55,9 @@ class Events extends Component {
             {eventItems}
           </ul>
         </div>
+          <div style={{justifyContent: "center", display: "flex"}}>
+              {this.props.pagination}
+          </div>
       </div>
     )
   }

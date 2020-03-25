@@ -7,6 +7,8 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Events from './app/components/Events/Events';
 import AddEventDialog from "./app/components/AddEventDialog";
 import Axios from "axios";
+import Pagination from "react-js-pagination";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class App extends React.Component {
@@ -19,7 +21,7 @@ class App extends React.Component {
       photo: null,
       addEventDialogOpen: false,
       applications: null,
-      pagination: null,
+      paginationObject: null,
       selectedApplicationId: null
     };
 
@@ -29,33 +31,51 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    Axios.get("http://cleancity.test/api/get_apps").then(resp => {
-        this.setState({
-          applications: resp.data.data
-        }, () => {
-          let urlString = window.location.href;
-          let urlStaged = urlString.replace('/', '');
-          let url = new URL(urlStaged);
+    this.getApplications(null);
+  }
 
-          const id = url.searchParams.get('id');
-          const applications = this.state.applications;
-          let selectedPosition = null;
+  getApplications = (pageNumber) => {
+    let backendUrl = "http://cleancity.test/api/get_apps";
+    if (pageNumber){backendUrl = backendUrl + "?page=" + pageNumber}
 
-          for (let i = 0; i < applications.length; i++){
-            if (applications[i].id == id){
-              selectedPosition = applications[i]
-            }
+    let urlString = window.location.href;
+    let urlStaged = urlString.replace('/', '');
+    let url = new URL(urlStaged);
+
+    const id = url.searchParams.get('id');
+    const sign = pageNumber ? "&" : "?";
+    if (id){backendUrl = backendUrl + sign + "id=" + id}
+
+    Axios.get(backendUrl).then(resp => {
+      console.log(resp.data);
+      this.setState({
+        paginationObject: resp.data,
+        applications: resp.data.data
+      }, () => {
+        if (pageNumber) {
+          window.history.pushState(null, '',  window.location.pathname);
+          return;
+        }
+        let urlString = window.location.href;
+        let urlStaged = urlString.replace('/', '');
+        let url = new URL(urlStaged);
+
+        const id = url.searchParams.get('id');
+        const applications = this.state.applications;
+        let selectedPosition = null;
+
+        for (let i = 0; i < applications.length; i++) {
+          if (applications[i].id == id) {
+            selectedPosition = applications[i]
           }
-          if(selectedPosition){
-            this.setState({
-              selectedLocation: {lat: selectedPosition.lat, lng: selectedPosition.long}
-            })
-          }
-
-        })
+        }
+        if (selectedPosition) {
+          this.setState({
+            selectedLocation: {lat: selectedPosition.lat, lng: selectedPosition.long}
+          })
+        }
+      })
     });
-
-
   }
 
   handleOpen() {
@@ -70,20 +90,30 @@ class App extends React.Component {
     })
   };
 
-  onEventClick(event) {
-    this.setState({
-      selectedLocation: event
-    })
-  }
+  // onEventClick(event) {
+  //   this.setState({
+  //     selectedLocation: event
+  //   })
+  // }
 
   render() {
     const eventItems = this.state.applications;
+    const paginationComponent = this.state.paginationObject &&
+        <Pagination
+        data={this.state.paginationObject.data}
+        activePage={this.state.paginationObject.current_page}
+        itemsCountPerPage={10}
+        totalItemsCount={this.state.paginationObject.total}
+        pageRangeDisplayed={5}
+        itemClass="page-item"
+        linkClass="page-link"
+        onChange={this.getApplications}/>;
     return (
       <div className="App">
         {/* <Header /> */}
         <Grid container>
           <Grid item xs={12} md={4} xl={3}>
-            <Events eventItems={eventItems} onEventClick={this.onEventClick} />
+            <Events eventItems={eventItems} onEventClick={this.onEventClick} pagination={paginationComponent}/>
           </Grid>
           <Grid item xs={12} md={8} xl={9}>
             <Map selectedLocation={this.state.selectedLocation} locations={eventItems} />
