@@ -3,6 +3,15 @@ import { withGoogleMap, withScriptjs, GoogleMap, Marker, InfoWindow } from "reac
 import EventDetailDialog from "./EventDetailDialog";
 import Button from '@material-ui/core/Button';
 
+const MyMapComponent = withScriptjs(withGoogleMap((props) =>
+    <GoogleMap
+        defaultZoom={props.selectedLocation ? 12 : 8}
+        center={props.selectedLocation ? props.selectedLocation : {lat: 38.559547, lng: 68.757950}}
+        defaultCenter={{ lat: props.defaultZoomLat ? props.defaultZoomLat : 38.559547, lng: props.defaultZoomLng ? props.defaultZoomLng : 68.757950 }}
+    >
+        {props.markers}
+    </GoogleMap>));
+
 class Map extends React.Component {
     constructor(props) {
         super(props);
@@ -28,7 +37,10 @@ class Map extends React.Component {
                 showingInfoWindow: true
             })
         }
+    }
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return true;
     }
 
     render() {
@@ -66,18 +78,22 @@ class Map extends React.Component {
             );
         });
 
-        const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-            <GoogleMap
-                defaultZoom={this.props.selectedLocation ? 12 : 8}
-                center={this.props.selectedLocation ? this.props.selectedLocation : {lat: 38.559547, lng: 68.757950}}
-                defaultCenter={{ lat: this.state.defaultZoomLat ? this.state.defaultZoomLat : 38.559547, lng: this.state.defaultZoomLng ? this.state.defaultZoomLng : 68.757950 }}
-            >
-                {markers}
-            </GoogleMap>));
+        // const MyMapComponent = withScriptjs(withGoogleMap((props) =>
+        //     <GoogleMap
+        //         defaultZoom={this.props.selectedLocation ? 12 : 8}
+        //         center={this.props.selectedLocation ? this.props.selectedLocation : {lat: 38.559547, lng: 68.757950}}
+        //         defaultCenter={{ lat: this.state.defaultZoomLat ? this.state.defaultZoomLat : 38.559547, lng: this.state.defaultZoomLng ? this.state.defaultZoomLng : 68.757950 }}
+        //     >
+        //         {markers}
+        //     </GoogleMap>));
 
         return (
             <div>
                 <MyMapComponent
+                    selectedLocation={this.props.selectedLocation}
+                    defaultZoomLat={this.state.defaultZoomLat}
+                    defaultZoomLng={this.state.defaultZoomLng}
+                    markers={markers}
                     googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuHu6uhb9F2sLYrup2eydm_rwxKloUYEU"
                     loadingElement={<div style={{ height: `100%` }} />}
                     containerElement={<div className="MyMapComponent" />}
