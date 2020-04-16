@@ -65,7 +65,7 @@ class App extends React.Component {
         let selectedPosition = null;
 
         for (let i = 0; i < applications.length; i++) {
-          if (applications[i].id == id) {
+          if (applications[i].id === id) {
             selectedPosition = applications[i]
           }
         }
@@ -108,6 +108,7 @@ class App extends React.Component {
         itemClass="page-item"
         linkClass="page-link"
         onChange={this.getApplications}/>;
+        
     return (
       <div className="App">
         {/* <Header /> */}

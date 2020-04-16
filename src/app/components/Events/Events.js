@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 import './events.css';
+import About from '../About/About';
 
 class Events extends Component {
   constructor(props) {
@@ -48,23 +49,29 @@ class Events extends Component {
     return (
       <div className="Events">
         <div className="header">
-          <h2 className="logo"><span className="green">Clean</span> City</h2>
+          <h2 className="logo">
+            <span>
+              <span className="green">Clean</span> City
+            </span>
+
+            <About />
+          </h2>
         </div>
         <div className="events">
           <ul className="event-items">
             {eventItems}
           </ul>
         </div>
-          <div style={{justifyContent: "center", display: "flex"}}>
-              {this.props.pagination}
-          </div>
+        <div style={{ justifyContent: "center", display: "flex" }}>
+          {this.props.pagination}
+        </div>
       </div>
     )
   }
 
-    handleImageClick(file_link) {
+  handleImageClick(file_link) {
 
-    }
+  }
 }
 
 export default Events;
