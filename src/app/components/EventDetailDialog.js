@@ -21,7 +21,7 @@ export default class EventDetailDialog extends React.Component {
             >
             <DialogTitle id={"alert-dialog-title"}>Photo Title</DialogTitle>
             <DialogContent>
-                {this.props.location && <img src={this.props.photoUrl} alt="photo"/>}
+                {this.props.location && <img src={this.props.photoUrl} alt="photo1"/>}
                 <hr/>
                 {this.props.comment}
             </DialogContent>

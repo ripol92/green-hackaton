@@ -10,12 +10,19 @@
   padding: 20px;
 }
 
-.header .logo {
+.logo {
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo .green {
   color: #39b980;
+}
+
+.about-us-btn {
+  float: right;
 }
 
 .event-items {
