@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/green-hackaton/static/css/main.86f12bfd.chunk.css",
+    "main.js": "/green-hackaton/static/js/main.44e01e5e.chunk.js",
+    "main.js.map": "/green-hackaton/static/js/main.44e01e5e.chunk.js.map",
+    "runtime-main.js": "/green-hackaton/static/js/runtime-main.eeefd279.js",
+    "runtime-main.js.map": "/green-hackaton/static/js/runtime-main.eeefd279.js.map",
+    "static/css/2.47e06e2e.chunk.css": "/green-hackaton/static/css/2.47e06e2e.chunk.css",
+    "static/js/2.425f887f.chunk.js": "/green-hackaton/static/js/2.425f887f.chunk.js",
+    "static/js/2.425f887f.chunk.js.map": "/green-hackaton/static/js/2.425f887f.chunk.js.map",
+    "index.html": "/green-hackaton/index.html",
+    "precache-manifest.e601f5fd1563a4cb795cbd9e8a56dafd.js": "/green-hackaton/precache-manifest.e601f5fd1563a4cb795cbd9e8a56dafd.js",
+    "service-worker.js": "/green-hackaton/service-worker.js",
+    "static/css/2.47e06e2e.chunk.css.map": "/green-hackaton/static/css/2.47e06e2e.chunk.css.map",
+    "static/css/main.86f12bfd.chunk.css.map": "/green-hackaton/static/css/main.86f12bfd.chunk.css.map",
+    "static/js/2.425f887f.chunk.js.LICENSE.txt": "/green-hackaton/static/js/2.425f887f.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/green-hackaton/static/media/Montserrat-Regular.9c460951.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.eeefd279.js",
+    "static/css/2.47e06e2e.chunk.css",
+    "static/js/2.425f887f.chunk.js",
+    "static/css/main.86f12bfd.chunk.css",
+    "static/js/main.44e01e5e.chunk.js"
+  ]
+}
