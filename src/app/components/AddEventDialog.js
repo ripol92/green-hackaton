@@ -190,6 +190,7 @@ class AddEventDialog extends React.Component {
         })
     }
 
+
     send() {
         if (this.state.comment && this.state.district && this.state.photo) {
             const formData = new FormData();
