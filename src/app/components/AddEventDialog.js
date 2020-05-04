@@ -4,7 +4,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import TextField from "@material-ui/core/TextField";
-import { Button } from "@material-ui/core";
+import {Button, CircularProgress} from "@material-ui/core";
 import { Camera } from "@material-ui/icons";
 import CheckIcon from '@material-ui/icons/Check';
 import DialogActions from "@material-ui/core/DialogActions";
@@ -29,7 +29,8 @@ class AddEventDialog extends React.Component {
             selectOpen: false,
             photo: null,
             errorToasterOpen: false,
-            successToasterOpen: false
+            successToasterOpen: false,
+            loading: false
         };
 
         this.handleCameraChange = this.handleCameraChange.bind(this);
@@ -110,9 +111,14 @@ class AddEventDialog extends React.Component {
                     <Button onClick={this.props.onClose} color="primary">
                         Отмена
                     </Button>
-                    <Button onClick={this.handleSendClick} color="primary">
-                        Отправить
-                    </Button>
+                    {!this.state.loading ?
+                        <Button onClick={this.handleSendClick} color="primary">
+                            Отправить
+                        </Button>
+                        :
+                        <CircularProgress size={14} />
+                    }
+
                 </DialogActions>
                 <Snackbar
                     anchorOrigin={{
@@ -178,11 +184,15 @@ class AddEventDialog extends React.Component {
     handleSendClick() {
         if (!navigator.geolocation.getCurrentPosition(this.handleLocation)) {
             console.log("Пожалуйста, предоставьте свои геоданные ")
+            this.setState({
+                errorToasterOpen: true
+            })
         };
     }
 
     handleLocation(position) {
         this.setState({
+            loading: true,
             lng: position.coords.longitude,
             lat: position.coords.latitude
         }, () => {
@@ -209,6 +219,7 @@ class AddEventDialog extends React.Component {
             }).catch(err => {
                 console.log(err);
                 this.setState({
+                    loading: false,
                     errorToasterOpen: true
                 })
             })
