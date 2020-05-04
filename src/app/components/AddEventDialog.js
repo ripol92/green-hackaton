@@ -199,7 +199,7 @@ class AddEventDialog extends React.Component {
             formData.append("comment", this.state.comment);
             formData.append("district", this.state.district);
 
-            Axios.post("http://cleancity.test/api/create_app", formData).then(resp => {
+            Axios.post("http://cleancity.foodstan.tj/api/create_app", formData).then(resp => {
                 this.setState({
                     successToasterOpen: true
                 }, () => {
