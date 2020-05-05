@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/green-hackaton/static/css/main.86f12bfd.chunk.css",
-    "main.js": "/green-hackaton/static/js/main.b4035654.chunk.js",
-    "main.js.map": "/green-hackaton/static/js/main.b4035654.chunk.js.map",
+    "main.js": "/green-hackaton/static/js/main.fac791c5.chunk.js",
+    "main.js.map": "/green-hackaton/static/js/main.fac791c5.chunk.js.map",
     "runtime-main.js": "/green-hackaton/static/js/runtime-main.eeefd279.js",
     "runtime-main.js.map": "/green-hackaton/static/js/runtime-main.eeefd279.js.map",
     "static/css/2.47e06e2e.chunk.css": "/green-hackaton/static/css/2.47e06e2e.chunk.css",
     "static/js/2.7e48d985.chunk.js": "/green-hackaton/static/js/2.7e48d985.chunk.js",
     "static/js/2.7e48d985.chunk.js.map": "/green-hackaton/static/js/2.7e48d985.chunk.js.map",
     "index.html": "/green-hackaton/index.html",
-    "precache-manifest.768266df07b56eb233a66b4488624e0b.js": "/green-hackaton/precache-manifest.768266df07b56eb233a66b4488624e0b.js",
+    "precache-manifest.b49e08db24bd185c1a4da84e0e66d714.js": "/green-hackaton/precache-manifest.b49e08db24bd185c1a4da84e0e66d714.js",
     "service-worker.js": "/green-hackaton/service-worker.js",
     "static/css/2.47e06e2e.chunk.css.map": "/green-hackaton/static/css/2.47e06e2e.chunk.css.map",
     "static/css/main.86f12bfd.chunk.css.map": "/green-hackaton/static/css/main.86f12bfd.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.47e06e2e.chunk.css",
     "static/js/2.7e48d985.chunk.js",
     "static/css/main.86f12bfd.chunk.css",
-    "static/js/main.b4035654.chunk.js"
+    "static/js/main.fac791c5.chunk.js"
   ]
 }
