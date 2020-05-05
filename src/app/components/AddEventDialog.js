@@ -184,9 +184,9 @@ class AddEventDialog extends React.Component {
     handleSendClick() {
         if (!navigator.geolocation.getCurrentPosition(this.handleLocation)) {
             console.log("Пожалуйста, предоставьте свои геоданные ")
-            this.setState({
-                errorToasterOpen: true
-            })
+            // this.setState({
+            //     errorToasterOpen: true
+            // })
         };
     }
 
