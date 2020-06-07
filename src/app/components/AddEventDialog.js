@@ -15,6 +15,7 @@ import Select from "@material-ui/core/Select";
 import Grid from "@material-ui/core/Grid";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
+import {compress, compressAccurately} from 'image-conversion';
 
 class AddEventDialog extends React.Component {
     constructor(props) {
@@ -132,10 +133,10 @@ class AddEventDialog extends React.Component {
                     action={
                         <React.Fragment>
                             <Button color="secondary" size="small" onClick={this.handleErrorToasterCLose}>
-                                UNDO
+                                Отменить
                             </Button>
                             <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleErrorToasterCLose}>
-                                Error!
+                                Ошибка!
                             </IconButton>
                         </React.Fragment>
                     }
@@ -172,13 +173,19 @@ class AddEventDialog extends React.Component {
 
 
     handleCameraChange(event) {
-        this.setState({
-            photo: event.target.files[0]
-        }, () => {
+        const fileName = event.target.files[0].name;
+       compressAccurately(event.target.files[0], 80).then(res => {
+           res.name = fileName;
             this.setState({
-                photoLoaded: true
+                photo: res
+            }, () => {
+                this.setState({
+                    photoLoaded: true
+                })
             })
-        })
+        });
+        // const photo = event.target.files[0];
+
     }
 
     handleSendClick() {
@@ -210,7 +217,8 @@ class AddEventDialog extends React.Component {
             formData.append("comment", this.state.comment);
             formData.append("district", this.state.district);
 
-            Axios.post("https://cleancity.foodstan.tj/api/create_app", formData).then(resp => {
+            // Axios.post("https://cleancity.foodstan.tj/api/create_app", formData).then(resp => {
+            Axios.post("http://cleancity.test/api/create_app", formData).then(resp => {
                 this.setState({
                     successToasterOpen: true
                 }, () => {
