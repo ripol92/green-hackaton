@@ -47,27 +47,16 @@ class AddEventDialog extends React.Component {
                     <DialogContentText>
                         Проявите социальную ответственность - сфотографируйте и отправьте нам.
                     </DialogContentText>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Комментарий"
-                        type="text"
-                        fullWidth
-                        multiline
-                        onChange={this.handleCommentChange}
-                    />
-
                     <Grid container style={{ marginTop: "5px" }}>
                         <Grid item xs={12} sm={6} md={6}>
                             <InputLabel >Фотография</InputLabel>
                             <input type="file"
-                                accept="image/jpg,image/png/image/gif"
-                                capture="camera"
-                                id={"camera-photo"}
-                                style={{ display: "none", marginTop: "2px" }}
-                                ref={cameraFile => this.cameraFile = cameraFile}
-                                onChange={this.handleCameraChange} />
+                                   accept="image/jpg,image/png/image/gif"
+                                   capture="camera"
+                                   id={"camera-photo"}
+                                   style={{ display: "none", marginTop: "2px" }}
+                                   ref={cameraFile => this.cameraFile = cameraFile}
+                                   onChange={this.handleCameraChange} />
                             <Button
                                 style={{ display: this.state.photoLoaded && "none", }}
                                 variant="contained"
@@ -106,7 +95,16 @@ class AddEventDialog extends React.Component {
                             </Select>
                         </Grid>
                     </Grid>
-
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Комментарий"
+                        type="text"
+                        fullWidth
+                        multiline
+                        onChange={this.handleCommentChange}
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.props.onClose} color="primary">
@@ -174,7 +172,7 @@ class AddEventDialog extends React.Component {
 
     handleCameraChange(event) {
         const fileName = event.target.files[0].name;
-       compressAccurately(event.target.files[0], 80).then(res => {
+       compressAccurately(event.target.files[0], 150).then(res => {
            res.name = fileName;
             this.setState({
                 photo: res
