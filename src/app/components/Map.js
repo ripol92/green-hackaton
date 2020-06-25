@@ -78,15 +78,7 @@ class Map extends React.Component {
             );
         });
 
-        // const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-        //     <GoogleMap
-        //         defaultZoom={this.props.selectedLocation ? 12 : 8}
-        //         center={this.props.selectedLocation ? this.props.selectedLocation : {lat: 38.559547, lng: 68.757950}}
-        //         defaultCenter={{ lat: this.state.defaultZoomLat ? this.state.defaultZoomLat : 38.559547, lng: this.state.defaultZoomLng ? this.state.defaultZoomLng : 68.757950 }}
-        //     >
-        //         {markers}
-        //     </GoogleMap>));
-
+        const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
         return (
             <div>
                 <MyMapComponent
@@ -94,7 +86,7 @@ class Map extends React.Component {
                     defaultZoomLat={this.state.defaultZoomLat}
                     defaultZoomLng={this.state.defaultZoomLng}
                     markers={markers}
-                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuHu6uhb9F2sLYrup2eydm_rwxKloUYEU"
+                    googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${apiKey}`}
                     loadingElement={<div style={{ height: `100%` }} />}
                     containerElement={<div className="MyMapComponent" />}
                     mapElement={<div style={{ height: `100%` }} />}
