@@ -1,5 +1,6 @@
 {
   "name": "hackaton.test",
+  "homepage": "http://ripol92.github.io/green-hackaton",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,7 +14,9 @@
     "@types/react-dom": "^16.9.5",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
+    "gh-pages": "^2.2.0",
     "google-map-react": "^1.1.6",
+    "image-conversion": "^2.1.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-google-maps": "^9.4.5",
@@ -27,7 +30,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

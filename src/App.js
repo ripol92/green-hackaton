@@ -35,7 +35,7 @@ class App extends React.Component {
   }
 
   getApplications = (pageNumber) => {
-    let backendUrl = "http://cleancity.test/api/get_apps";
+    let backendUrl = "https://cleancity.foodstan.tj/api/get_apps";
     if (pageNumber){backendUrl = backendUrl + "?page=" + pageNumber}
 
     let urlString = window.location.href;
@@ -47,7 +47,6 @@ class App extends React.Component {
     if (id){backendUrl = backendUrl + sign + "id=" + id}
 
     Axios.get(backendUrl).then(resp => {
-      console.log(resp.data);
       this.setState({
         paginationObject: resp.data,
         applications: resp.data.data
@@ -89,12 +88,6 @@ class App extends React.Component {
       addEventDialogOpen: false
     })
   };
-
-  // onEventClick(event) {
-  //   this.setState({
-  //     selectedLocation: event
-  //   })
-  // }
 
   render() {
     const eventItems = this.state.applications;
@@ -146,7 +139,6 @@ class App extends React.Component {
         const newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
         window.history.pushState(null, '', newRelativePathQuery);
       }
-
     })
   }
 

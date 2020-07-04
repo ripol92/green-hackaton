@@ -4,7 +4,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import TextField from "@material-ui/core/TextField";
-import { Button } from "@material-ui/core";
+import {Button, CircularProgress} from "@material-ui/core";
 import { Camera } from "@material-ui/icons";
 import CheckIcon from '@material-ui/icons/Check';
 import DialogActions from "@material-ui/core/DialogActions";
@@ -15,6 +15,7 @@ import Select from "@material-ui/core/Select";
 import Grid from "@material-ui/core/Grid";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
+import {compress, compressAccurately} from 'image-conversion';
 
 class AddEventDialog extends React.Component {
     constructor(props) {
@@ -29,7 +30,8 @@ class AddEventDialog extends React.Component {
             selectOpen: false,
             photo: null,
             errorToasterOpen: false,
-            successToasterOpen: false
+            successToasterOpen: false,
+            loading: false
         };
 
         this.handleCameraChange = this.handleCameraChange.bind(this);
@@ -45,27 +47,16 @@ class AddEventDialog extends React.Component {
                     <DialogContentText>
                         Проявите социальную ответственность - сфотографируйте и отправьте нам.
                     </DialogContentText>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Комментарий"
-                        type="text"
-                        fullWidth
-                        multiline
-                        onChange={this.handleCommentChange}
-                    />
-
                     <Grid container style={{ marginTop: "5px" }}>
                         <Grid item xs={12} sm={6} md={6}>
                             <InputLabel >Фотография</InputLabel>
                             <input type="file"
-                                accept="image/jpg,image/png/image/gif"
-                                capture="camera"
-                                id={"camera-photo"}
-                                style={{ display: "none", marginTop: "2px" }}
-                                ref={cameraFile => this.cameraFile = cameraFile}
-                                onChange={this.handleCameraChange} />
+                                   accept="image/jpg,image/png/image/gif"
+                                   capture="camera"
+                                   id={"camera-photo"}
+                                   style={{ display: "none", marginTop: "2px" }}
+                                   ref={cameraFile => this.cameraFile = cameraFile}
+                                   onChange={this.handleCameraChange} />
                             <Button
                                 style={{ display: this.state.photoLoaded && "none", }}
                                 variant="contained"
@@ -104,15 +95,29 @@ class AddEventDialog extends React.Component {
                             </Select>
                         </Grid>
                     </Grid>
-
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Комментарий"
+                        type="text"
+                        fullWidth
+                        multiline
+                        onChange={this.handleCommentChange}
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.props.onClose} color="primary">
                         Отмена
                     </Button>
-                    <Button onClick={this.handleSendClick} color="primary">
-                        Отправить
-                    </Button>
+                    {!this.state.loading ?
+                        <Button onClick={this.handleSendClick} color="primary">
+                            Отправить
+                        </Button>
+                        :
+                        <CircularProgress size={14} />
+                    }
+
                 </DialogActions>
                 <Snackbar
                     anchorOrigin={{
@@ -126,10 +131,10 @@ class AddEventDialog extends React.Component {
                     action={
                         <React.Fragment>
                             <Button color="secondary" size="small" onClick={this.handleErrorToasterCLose}>
-                                UNDO
+                                Отменить
                             </Button>
                             <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleErrorToasterCLose}>
-                                Error!
+                                Ошибка!
                             </IconButton>
                         </React.Fragment>
                     }
@@ -166,29 +171,40 @@ class AddEventDialog extends React.Component {
 
 
     handleCameraChange(event) {
-        this.setState({
-            photo: event.target.files[0]
-        }, () => {
+        const fileName = event.target.files[0].name;
+       compressAccurately(event.target.files[0], 150).then(res => {
+           res.name = fileName;
             this.setState({
-                photoLoaded: true
+                photo: res
+            }, () => {
+                this.setState({
+                    photoLoaded: true
+                })
             })
-        })
+        });
+        // const photo = event.target.files[0];
+
     }
 
     handleSendClick() {
         if (!navigator.geolocation.getCurrentPosition(this.handleLocation)) {
             console.log("Пожалуйста, предоставьте свои геоданные ")
+            // this.setState({
+            //     errorToasterOpen: true
+            // })
         };
     }
 
     handleLocation(position) {
         this.setState({
+            loading: true,
             lng: position.coords.longitude,
             lat: position.coords.latitude
         }, () => {
             this.send()
         })
     }
+
 
     send() {
         if (this.state.comment && this.state.district && this.state.photo) {
@@ -199,7 +215,7 @@ class AddEventDialog extends React.Component {
             formData.append("comment", this.state.comment);
             formData.append("district", this.state.district);
 
-            Axios.post("http://cleancity.test/api/create_app", formData).then(resp => {
+            Axios.post("https://cleancity.foodstan.tj/api/create_app", formData).then(resp => {
                 this.setState({
                     successToasterOpen: true
                 }, () => {
@@ -208,6 +224,7 @@ class AddEventDialog extends React.Component {
             }).catch(err => {
                 console.log(err);
                 this.setState({
+                    loading: false,
                     errorToasterOpen: true
                 })
             })
