@@ -1,0 +1,35 @@
+.TitleTemplate {
+
+    .text-content {
+
+        .title {
+            font-size: 40px;
+            line-height: 42px;
+            color: #202840;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            font-size: 20px;
+            line-height: 28px;
+            color: #6C7C93;
+            margin-bottom: 0;
+        }
+    }
+}
+
+@media(max-width: 767px) {
+    .TitleTemplate {
+        .text-content {
+            .title {
+                font-size: 30px;
+                line-height: 32px;
+            }
+            .description {
+                font-size: 18px;
+                line-height: 24px;
+            }
+        }
+    }
+}

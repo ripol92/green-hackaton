@@ -1,17 +1,17 @@
 import React from 'react';
-import './App.css';
-import Map from "./app/components/Map";
+import Axios from "axios";
+import Pagination from "react-js-pagination";
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import Events from './app/components/Events/Events';
-import AddEventDialog from "./app/components/AddEventDialog";
-import Axios from "axios";
-import Pagination from "react-js-pagination";
-import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Events from '../../components/Events/Events';
+import AddEventDialog from '../../components/AddEventDialog';
+import Map from "../../components/Map";
+import './application.css';
 
 
-class App extends React.Component {
+class Application extends React.Component {
   constructor(props) {
     super(props);
 
@@ -36,7 +36,7 @@ class App extends React.Component {
 
   getApplications = (pageNumber) => {
     let backendUrl = "https://cleancity.foodstan.tj/api/get_apps";
-    if (pageNumber){backendUrl = backendUrl + "?page=" + pageNumber}
+    if (pageNumber) { backendUrl = backendUrl + "?page=" + pageNumber }
 
     let urlString = window.location.href;
     let urlStaged = urlString.replace('/', '');
@@ -44,7 +44,7 @@ class App extends React.Component {
 
     const id = url.searchParams.get('id');
     const sign = pageNumber ? "&" : "?";
-    if (id){backendUrl = backendUrl + sign + "id=" + id}
+    if (id) { backendUrl = backendUrl + sign + "id=" + id }
 
     Axios.get(backendUrl).then(resp => {
       this.setState({
@@ -52,7 +52,7 @@ class App extends React.Component {
         applications: resp.data.data
       }, () => {
         if (pageNumber) {
-          window.history.pushState(null, '',  window.location.pathname);
+          window.history.pushState(null, '', window.location.pathname);
           return;
         }
         let urlString = window.location.href;
@@ -70,7 +70,7 @@ class App extends React.Component {
         }
         if (selectedPosition) {
           this.setState({
-            selectedLocation: {lat: selectedPosition.lat, lng: selectedPosition.long}
+            selectedLocation: { lat: selectedPosition.lat, lng: selectedPosition.long }
           })
         }
       })
@@ -92,7 +92,7 @@ class App extends React.Component {
   render() {
     const eventItems = this.state.applications;
     const paginationComponent = this.state.paginationObject &&
-        <Pagination
+      <Pagination
         data={this.state.paginationObject.data}
         activePage={this.state.paginationObject.current_page}
         itemsCountPerPage={10}
@@ -100,14 +100,13 @@ class App extends React.Component {
         pageRangeDisplayed={5}
         itemClass="page-item"
         linkClass="page-link"
-        onChange={this.getApplications}/>;
-        
+        onChange={this.getApplications} />;
+
     return (
-      <div className="App">
-        {/* <Header /> */}
+      <div className="Application">
         <Grid container>
           <Grid item xs={12} md={4} xl={3}>
-            <Events eventItems={eventItems} onEventClick={this.onEventClick} pagination={paginationComponent}/>
+            <Events eventItems={eventItems} onEventClick={this.onEventClick} pagination={paginationComponent} />
           </Grid>
           <Grid item xs={12} md={8} xl={9}>
             <Map selectedLocation={this.state.selectedLocation} locations={eventItems} />
@@ -122,16 +121,16 @@ class App extends React.Component {
           aria-label="add a photo">
           <PhotoCamera />
         </IconButton>
-        <AddEventDialog open={this.state.addEventDialogOpen} onClose={this.handleClose}/>
+        <AddEventDialog open={this.state.addEventDialogOpen} onClose={this.handleClose} />
       </div>
     );
   }
 
 
-  onEventClick(event){
+  onEventClick(event) {
     this.setState({
       selectedPlace: event,
-      selectedLocation: {lat: event.lat, lng: event.long}
+      selectedLocation: { lat: event.lat, lng: event.long }
     }, () => {
       if ('URLSearchParams' in window) {
         const searchParams = new URLSearchParams(window.location.search);
@@ -144,4 +143,4 @@ class App extends React.Component {
 
 }
 
-export default App;
+export default Application;

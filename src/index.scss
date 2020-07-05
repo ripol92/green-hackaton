@@ -1,0 +1,12 @@
+@import "./app/shared/assets/fonts/CeraPro/fonts.scss";
+
+body {
+  margin: 0;
+  font-family: "Cera Pro";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  .green-text {
+    color: #79b741;
+  }
+}

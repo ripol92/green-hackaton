@@ -1,0 +1,96 @@
+$successColor: #79B741;
+$successHoverColor: #90CA5C;
+$successActiveColor: #6DA837;
+
+.button {
+    outline: none;
+    padding: 13px 50px;
+    border: none;
+    border-radius: 4px;
+    transition: .2s;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 24px;
+    text-decoration: none;
+    text-align: center;
+
+    &:focus {
+        outline: none;
+        text-decoration: none;
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.button.button-lg {
+    padding: 22px 60px;
+    font-size: 20px;
+    line-height: 25px;
+}
+
+.button.button-success {
+    background-color: $successColor;
+    color: #ffffff !important;
+
+    &:hover {
+        background-color: $successHoverColor;
+    }
+
+    &:active {
+        background-color: $successActiveColor;
+    }
+}
+
+.button.button-outline-success {
+    border: 1px solid $successColor;
+    background-color: transparent;
+    color: $successColor;
+
+    &:hover {
+        background-color: $successHoverColor;
+        border-color: $successHoverColor;
+        color: #ffffff;
+    }
+
+    &:active {
+        background-color: $successActiveColor;
+    }
+}
+
+.button.button-outline-secondary {
+    border: 1px solid #DFE4E9;
+    background-color: transparent;
+    font-size: 20px;
+    line-height: 25px;
+    color: #6C7C93;
+    padding: 19px 30px;
+
+    &:hover {
+        background-color: #79B741;
+        color: #ffffff;
+
+        .LinkArrow {
+            .link-arrow-line {
+                stroke: #ffffff;
+            }
+        }
+    }
+
+    &:active {
+        background-color: $successActiveColor;
+    }
+}
+
+@media(max-width: 767px) {
+    .button.button-lg {
+        padding: 13px 50px;
+        font-size: 20px;
+        line-height: 25px;
+    }
+}

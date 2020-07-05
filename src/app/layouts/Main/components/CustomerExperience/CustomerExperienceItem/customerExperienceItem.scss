@@ -1,0 +1,50 @@
+.CustomerExperienceItem {
+    padding-bottom: 30px;
+    border-bottom: 2px solid #DFE4E9;
+    translate: .2s;
+
+    &:hover {
+        .customer-experience-item-image-content {
+            img {
+                transform: scale(1.06);
+            }
+        }
+
+        border-color: #79B741;
+    }
+
+    .customer-experience-item-image-content {
+        padding-bottom: 20px;
+
+        img {
+            transition: .2s;
+            height: 100px;
+        }
+    }
+
+    .customer-experience-item-description-content {
+        width: 92%;
+
+        .customer-experience-item-title {
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 28px;
+            color: #202840;
+            margin-bottom: 22px;
+        }
+
+        .customer-experience-item-description {
+            font-size: 20px;
+            line-height: 28px;
+            color: #6C7C93;
+            margin-bottom: 0;
+        }
+
+    }
+}
+
+@media(max-width: 991px) {
+    .CustomerExperienceItem {
+        margin-bottom: 30px;
+    }
+}

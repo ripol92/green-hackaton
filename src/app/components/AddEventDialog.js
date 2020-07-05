@@ -4,7 +4,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import TextField from "@material-ui/core/TextField";
-import {Button, CircularProgress} from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import { Camera } from "@material-ui/icons";
 import CheckIcon from '@material-ui/icons/Check';
 import DialogActions from "@material-ui/core/DialogActions";
@@ -15,7 +15,7 @@ import Select from "@material-ui/core/Select";
 import Grid from "@material-ui/core/Grid";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
-import {compress, compressAccurately} from 'image-conversion';
+import { compressAccurately } from 'image-conversion';
 
 class AddEventDialog extends React.Component {
     constructor(props) {
@@ -51,12 +51,12 @@ class AddEventDialog extends React.Component {
                         <Grid item xs={12} sm={6} md={6}>
                             <InputLabel >Фотография</InputLabel>
                             <input type="file"
-                                   accept="image/jpg,image/png/image/gif"
-                                   capture="camera"
-                                   id={"camera-photo"}
-                                   style={{ display: "none", marginTop: "2px" }}
-                                   ref={cameraFile => this.cameraFile = cameraFile}
-                                   onChange={this.handleCameraChange} />
+                                accept="image/jpg,image/png/image/gif"
+                                capture="camera"
+                                id={"camera-photo"}
+                                style={{ display: "none", marginTop: "2px" }}
+                                ref={cameraFile => this.cameraFile = cameraFile}
+                                onChange={this.handleCameraChange} />
                             <Button
                                 style={{ display: this.state.photoLoaded && "none", }}
                                 variant="contained"
@@ -172,8 +172,8 @@ class AddEventDialog extends React.Component {
 
     handleCameraChange(event) {
         const fileName = event.target.files[0].name;
-       compressAccurately(event.target.files[0], 150).then(res => {
-           res.name = fileName;
+        compressAccurately(event.target.files[0], 150).then(res => {
+            res.name = fileName;
             this.setState({
                 photo: res
             }, () => {

@@ -1,0 +1,129 @@
+.Banner {
+    // height: 87vh;
+    height: 572px;
+    background: url('../../../../shared/assets/images/banner_background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .container {
+        height: 100%;
+        position: relative;
+
+        .banner-img {
+            position: absolute;
+            right: -24px;
+            top: 19px;
+            height: 550px;
+        }
+
+        .banner-text-content {
+            position: absolute;
+            top: 119px;
+            left: 12px;
+            z-index: 1;
+
+            .banner-title {
+                font-family: CeraPro-Bold;
+                font-size: 50px;
+                line-height: 58px;
+                color: #202840;
+                margin-bottom: 15px;
+            }
+
+            .banner-text {
+                font-size: 20px;
+                line-height: 28px;
+                color: #6C7C93;
+            }
+        }
+
+        .button-content {
+            position: absolute;
+            bottom: 132px;
+            left: 12px;
+        }
+    }
+}
+
+@media(max-width: 991px) {
+    .Banner {
+        height: auto;
+        padding: 50px 0;
+
+        .container {
+            .banner-img {
+                position: inherit;
+                top: inherit;
+                right: inherit;
+            }
+
+            .banner-text-content {
+                position: inherit;
+                top: inherit;
+                left: inherit;
+
+                .banner-title {
+                    font-size: 46px;
+                    line-height: 50px;
+                }
+            }
+
+            .button-content {
+                position: inherit;
+                bottom: inherit;
+                left: inherit;
+                margin-top: 50px;
+            }
+        }
+    }
+}
+
+@media(max-width: 767px) {
+    .Banner {
+        padding: 30px 0;
+        .container {
+            .banner-text-content {
+                .banner-title {
+                    font-size: 38px;
+                    line-height: 42px;
+                }
+
+                .banner-text {
+                    font-size: 18px;
+                    line-height: 24px;
+                    color: #6C7C93;
+                }
+            }
+
+            .banner-img {
+                margin-top: -50px;
+            }
+
+            .button-content {
+                .button {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 575px) {
+    .Banner {
+        .container {
+            .banner-img {
+                height: 300px;
+            }
+        }
+    }
+}
+
+@media(max-width: 400px) {
+    .Banner {
+        .container {
+            .banner-img {
+                height: 236px;
+            }
+        }
+    }
+}

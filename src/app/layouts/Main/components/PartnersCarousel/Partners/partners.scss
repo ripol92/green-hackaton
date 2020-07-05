@@ -1,0 +1,56 @@
+.Partners {
+    height: 110px;
+
+    .slick-slider {
+        height: 100%;
+
+        .slick-arrow {
+
+            &::before {
+                color: #222222;
+            }
+        }
+
+        .slick-list {
+            height: 100%;
+
+            .slick-track {
+                height: 100%;
+
+                .slick-slide {
+                    height: 100%;
+
+                    div {
+                        height: 100%;
+                    }
+
+                    .slide-item {
+                        height: 100%;
+                        display: flex !important;
+                        align-items: center;
+                        justify-content: center;
+
+                        .partner-link {
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media(max-width: 575px) {
+    .Partners {
+        .slick-slider {
+            .slick-prev {
+                left: 0;
+            }
+
+            .slick-next {
+                right: 0;
+            }
+        }
+    }
+}

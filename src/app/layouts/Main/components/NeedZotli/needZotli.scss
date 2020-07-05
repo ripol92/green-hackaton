@@ -1,0 +1,54 @@
+.NeedZotli {
+    margin-top: 100px;
+
+    .need-zotli-body {
+        min-height: 140px;
+        height: 140px;
+        background: #F7F8F9;
+        border-radius: 4px;
+
+        .row {
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            
+            .need-zotli-col {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .need-zotli-text {
+                    margin-bottom: 0;
+                    font-weight: 500;
+                    font-size: 30px;
+                    line-height: 28px;
+                    color: #6C7C93;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 991px) {
+    .NeedZotli {
+        .need-zotli-body {
+            padding: 30px;
+            height: auto;
+            
+            .row {
+                align-items: inherit;
+                justify-content: inherit;
+
+                .need-zotli-col {
+                    display: block;
+
+                    .need-zotli-text {
+                        margin-bottom: 24px;
+                        font-size: 28px;
+                        line-height: 26px;
+                    }
+                }
+            }
+        }
+    }
+}

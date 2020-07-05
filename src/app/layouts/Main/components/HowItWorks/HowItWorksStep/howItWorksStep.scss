@@ -1,0 +1,79 @@
+.HowItWorksStep {
+    margin: 60px 0;
+
+    &:hover {
+        .step-content {
+            .step {
+                background: #6C7C93;
+                color: #F4FBF9;
+            }
+
+            .step-line {
+                border-color: #6C7C93;
+            }
+        }
+    }
+
+    .step-content {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 50px;
+
+        .step {
+            height: 72px;
+            width: 72px;
+            min-width: 72px;
+            max-width: 72px;
+            border-radius: 50%;
+            margin-right: 24px;
+            background: #F4FBF9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .2s;
+
+            font-weight: 500;
+            font-size: 40px;
+            line-height: 42px;
+            color: #6C7C93;
+        }
+
+        .step-line {
+            height: 1px;
+            width: 100%;
+            border-bottom: 1px dashed #DFE4E9;
+        }
+    }
+
+    .step-description-content {
+        width: 90%;
+        
+        .step-title {
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 28px;
+            color: #202840;
+            margin-bottom: 22px;
+        }
+
+        .step-description {
+            font-size: 20px;
+            line-height: 28px;
+            color: #6C7C93;
+            margin-bottom: 0;
+        }
+    }
+}
+
+@media(max-width: 991px) {
+    .HowItWorksStep {
+        margin-bottom: 0;
+        
+        .step-content {
+            .step-line {
+                display: none;
+            }
+        }
+    }
+}
