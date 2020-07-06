@@ -1,26 +1,38 @@
 {
   "files": {
-    "main.css": "/green-hackaton/static/css/main.86f12bfd.chunk.css",
-    "main.js": "/green-hackaton/static/js/main.4eb523f6.chunk.js",
-    "main.js.map": "/green-hackaton/static/js/main.4eb523f6.chunk.js.map",
+    "main.css": "/green-hackaton/static/css/main.f3469902.chunk.css",
+    "main.js": "/green-hackaton/static/js/main.9ecdb5c7.chunk.js",
+    "main.js.map": "/green-hackaton/static/js/main.9ecdb5c7.chunk.js.map",
     "runtime-main.js": "/green-hackaton/static/js/runtime-main.eeefd279.js",
     "runtime-main.js.map": "/green-hackaton/static/js/runtime-main.eeefd279.js.map",
-    "static/css/2.47e06e2e.chunk.css": "/green-hackaton/static/css/2.47e06e2e.chunk.css",
-    "static/js/2.d637419c.chunk.js": "/green-hackaton/static/js/2.d637419c.chunk.js",
-    "static/js/2.d637419c.chunk.js.map": "/green-hackaton/static/js/2.d637419c.chunk.js.map",
+    "static/css/2.7c33ed24.chunk.css": "/green-hackaton/static/css/2.7c33ed24.chunk.css",
+    "static/js/2.bc6b8500.chunk.js": "/green-hackaton/static/js/2.bc6b8500.chunk.js",
+    "static/js/2.bc6b8500.chunk.js.map": "/green-hackaton/static/js/2.bc6b8500.chunk.js.map",
     "index.html": "/green-hackaton/index.html",
-    "precache-manifest.f5630637e5291e7297c66b0a423949df.js": "/green-hackaton/precache-manifest.f5630637e5291e7297c66b0a423949df.js",
+    "precache-manifest.d1924dda796c920d8d3f360efa30db7f.js": "/green-hackaton/precache-manifest.d1924dda796c920d8d3f360efa30db7f.js",
     "service-worker.js": "/green-hackaton/service-worker.js",
-    "static/css/2.47e06e2e.chunk.css.map": "/green-hackaton/static/css/2.47e06e2e.chunk.css.map",
-    "static/css/main.86f12bfd.chunk.css.map": "/green-hackaton/static/css/main.86f12bfd.chunk.css.map",
-    "static/js/2.d637419c.chunk.js.LICENSE.txt": "/green-hackaton/static/js/2.d637419c.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/green-hackaton/static/media/Montserrat-Regular.9c460951.ttf"
+    "static/css/2.7c33ed24.chunk.css.map": "/green-hackaton/static/css/2.7c33ed24.chunk.css.map",
+    "static/css/main.f3469902.chunk.css.map": "/green-hackaton/static/css/main.f3469902.chunk.css.map",
+    "static/js/2.bc6b8500.chunk.js.LICENSE.txt": "/green-hackaton/static/js/2.bc6b8500.chunk.js.LICENSE.txt",
+    "static/media/index.scss": "/green-hackaton/static/media/CeraPro-ThinItalic.bf7ee65f.woff",
+    "static/media/banner.scss": "/green-hackaton/static/media/banner_background.527b5f52.png",
+    "static/media/banner_image.svg": "/green-hackaton/static/media/banner_image.94c27c18.svg",
+    "static/media/garbage.png": "/green-hackaton/static/media/garbage.940a4aa1.png",
+    "static/media/green_tree.png": "/green-hackaton/static/media/green_tree.e4cf002a.png",
+    "static/media/ic_arrow_down.svg": "/green-hackaton/static/media/ic_arrow_down.0b88fa95.svg",
+    "static/media/ic_facebook.svg": "/green-hackaton/static/media/ic_facebook.8480c653.svg",
+    "static/media/ic_instagram.svg": "/green-hackaton/static/media/ic_instagram.a88f7d41.svg",
+    "static/media/ic_play.svg": "/green-hackaton/static/media/ic_play.1264d6ff.svg",
+    "static/media/ic_telegram.svg": "/green-hackaton/static/media/ic_telegram.f2494f3c.svg",
+    "static/media/ic_youtube.svg": "/green-hackaton/static/media/ic_youtube.90bc74fe.svg",
+    "static/media/slick-theme.css": "/green-hackaton/static/media/slick.f97e3bbf.svg",
+    "static/media/undp_logo.svg": "/green-hackaton/static/media/undp_logo.6d585856.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.eeefd279.js",
-    "static/css/2.47e06e2e.chunk.css",
-    "static/js/2.d637419c.chunk.js",
-    "static/css/main.86f12bfd.chunk.css",
-    "static/js/main.4eb523f6.chunk.js"
+    "static/css/2.7c33ed24.chunk.css",
+    "static/js/2.bc6b8500.chunk.js",
+    "static/css/main.f3469902.chunk.css",
+    "static/js/main.9ecdb5c7.chunk.js"
   ]
 }
