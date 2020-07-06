@@ -9,7 +9,7 @@ function CustomerExperience(props) {
 
     const params = {
         title: 'Проблемы, которые мы хотим решить',
-        description: 'Some text...'
+        description: ''
     }
 
     const items = props.items && props.items.length > 0 ?
