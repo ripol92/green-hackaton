@@ -11,7 +11,7 @@ function HowItWorks(props) {
 
     const params = {
         title: 'Как это работает',
-        description: 'Some text...'
+        description: ''
     }
 
     const items = props.params && props.params.length > 0 ?
