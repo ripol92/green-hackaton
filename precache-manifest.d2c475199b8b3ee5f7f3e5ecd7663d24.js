@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e7e85a2628f8535e5e191a7d8a5f673d",
+    "revision": "5c533bbb2a96496a53c6929e16af8605",
     "url": "/green-hackaton/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/green-hackaton/static/css/2.7c33ed24.chunk.css"
   },
   {
-    "revision": "517dd5d8eeb222c5f62b",
+    "revision": "f4ac76b5e35792ad382f",
     "url": "/green-hackaton/static/css/main.f3469902.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/green-hackaton/static/js/2.bc6b8500.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "517dd5d8eeb222c5f62b",
-    "url": "/green-hackaton/static/js/main.9ecdb5c7.chunk.js"
+    "revision": "f4ac76b5e35792ad382f",
+    "url": "/green-hackaton/static/js/main.6a3cf7da.chunk.js"
   },
   {
     "revision": "86249656d8081b664b78",
