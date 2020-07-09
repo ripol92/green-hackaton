@@ -17,13 +17,16 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import { compressAccurately } from 'image-conversion';
 
+
+const commentsHelperErrorText = "Введите комментарий"
+
 class AddEventDialog extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             file: null,
             district: "Somoni",
-            comment: null,
+            comment: "",
             lat: null,
             lng: null,
             photoLoaded: false,
@@ -31,12 +34,14 @@ class AddEventDialog extends React.Component {
             photo: null,
             errorToasterOpen: false,
             successToasterOpen: false,
-            loading: false
+            loading: false,
+            commentsValidationError: false
         };
 
         this.handleCameraChange = this.handleCameraChange.bind(this);
         this.handleLocation = this.handleLocation.bind(this);
         this.handleSendClick = this.handleSendClick.bind(this);
+        this.send = this.send.bind(this);
     }
 
     render() {
@@ -96,6 +101,7 @@ class AddEventDialog extends React.Component {
                         </Grid>
                     </Grid>
                     <TextField
+                        error={this.state.commentsValidationError}
                         autoFocus
                         margin="dense"
                         id="name"
@@ -103,6 +109,7 @@ class AddEventDialog extends React.Component {
                         type="text"
                         fullWidth
                         multiline
+                        helperText={this.state.commentsValidationError ? commentsHelperErrorText : "" }
                         onChange={this.handleCommentChange}
                     />
                 </DialogContent>
@@ -127,7 +134,7 @@ class AddEventDialog extends React.Component {
                     open={this.state.errorToasterOpen}
                     autoHideDuration={6000}
                     onClose={this.handleErrorToasterCLose}
-                    message="Whoops..."
+                    message="Выберите фотогрфию"
                     action={
                         <React.Fragment>
                             <Button color="secondary" size="small" onClick={this.handleErrorToasterCLose}>
@@ -172,8 +179,13 @@ class AddEventDialog extends React.Component {
 
     handleCameraChange(event) {
         const fileName = event.target.files[0].name;
+        const fileSize = event.target.files[0].size
         compressAccurately(event.target.files[0], 150).then(res => {
-            res.name = fileName;
+            // compression start only with files with size greater than 150. After compression we have
+            // blob file with no name, we need to specify that name for making blob file
+            if(fileSize / 1024 > 150) {
+                res.name = fileName;
+            }
             this.setState({
                 photo: res
             }, () => {
@@ -197,7 +209,6 @@ class AddEventDialog extends React.Component {
 
     handleLocation(position) {
         this.setState({
-            loading: true,
             lng: position.coords.longitude,
             lat: position.coords.latitude
         }, () => {
@@ -207,6 +218,19 @@ class AddEventDialog extends React.Component {
 
 
     send() {
+        if (this.state.comment.length === 0) {
+            this.setState({
+                commentsValidationError: true
+            })
+            return;
+        }
+        if (!this.state.photo) {
+            this.setState({
+                errorToasterOpen: true
+            })
+            return;
+        }
+
         if (this.state.comment && this.state.district && this.state.photo) {
             const formData = new FormData();
             formData.append("file", this.state.photo, this.state.photo.name);
@@ -215,6 +239,9 @@ class AddEventDialog extends React.Component {
             formData.append("comment", this.state.comment);
             formData.append("district", this.state.district);
 
+            this.setState({
+                loading: true
+            })
             Axios.post("https://cleancity.foodstan.tj/api/create_app", formData).then(resp => {
                 this.setState({
                     successToasterOpen: true
@@ -233,7 +260,8 @@ class AddEventDialog extends React.Component {
 
     handleCommentChange = (event) => {
         this.setState({
-            comment: event.target.value
+            comment: event.target.value,
+            commentsValidationError: false
         })
     }
 
