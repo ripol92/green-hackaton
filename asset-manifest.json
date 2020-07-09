@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/green-hackaton/static/css/main.f3469902.chunk.css",
-    "main.js": "/green-hackaton/static/js/main.6a3cf7da.chunk.js",
-    "main.js.map": "/green-hackaton/static/js/main.6a3cf7da.chunk.js.map",
+    "main.js": "/green-hackaton/static/js/main.ddc65478.chunk.js",
+    "main.js.map": "/green-hackaton/static/js/main.ddc65478.chunk.js.map",
     "runtime-main.js": "/green-hackaton/static/js/runtime-main.eeefd279.js",
     "runtime-main.js.map": "/green-hackaton/static/js/runtime-main.eeefd279.js.map",
     "static/css/2.7c33ed24.chunk.css": "/green-hackaton/static/css/2.7c33ed24.chunk.css",
-    "static/js/2.bc6b8500.chunk.js": "/green-hackaton/static/js/2.bc6b8500.chunk.js",
-    "static/js/2.bc6b8500.chunk.js.map": "/green-hackaton/static/js/2.bc6b8500.chunk.js.map",
+    "static/js/2.6ef1e62b.chunk.js": "/green-hackaton/static/js/2.6ef1e62b.chunk.js",
+    "static/js/2.6ef1e62b.chunk.js.map": "/green-hackaton/static/js/2.6ef1e62b.chunk.js.map",
     "index.html": "/green-hackaton/index.html",
-    "precache-manifest.d2c475199b8b3ee5f7f3e5ecd7663d24.js": "/green-hackaton/precache-manifest.d2c475199b8b3ee5f7f3e5ecd7663d24.js",
+    "precache-manifest.98f545d27e6581bbc6dc8e6a466f5e99.js": "/green-hackaton/precache-manifest.98f545d27e6581bbc6dc8e6a466f5e99.js",
     "service-worker.js": "/green-hackaton/service-worker.js",
     "static/css/2.7c33ed24.chunk.css.map": "/green-hackaton/static/css/2.7c33ed24.chunk.css.map",
     "static/css/main.f3469902.chunk.css.map": "/green-hackaton/static/css/main.f3469902.chunk.css.map",
-    "static/js/2.bc6b8500.chunk.js.LICENSE.txt": "/green-hackaton/static/js/2.bc6b8500.chunk.js.LICENSE.txt",
+    "static/js/2.6ef1e62b.chunk.js.LICENSE.txt": "/green-hackaton/static/js/2.6ef1e62b.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/green-hackaton/static/media/CeraPro-ThinItalic.bf7ee65f.woff",
     "static/media/banner.scss": "/green-hackaton/static/media/banner_background.527b5f52.png",
     "static/media/banner_image.svg": "/green-hackaton/static/media/banner_image.94c27c18.svg",
@@ -31,8 +31,8 @@
   "entrypoints": [
     "static/js/runtime-main.eeefd279.js",
     "static/css/2.7c33ed24.chunk.css",
-    "static/js/2.bc6b8500.chunk.js",
+    "static/js/2.6ef1e62b.chunk.js",
     "static/css/main.f3469902.chunk.css",
-    "static/js/main.6a3cf7da.chunk.js"
+    "static/js/main.ddc65478.chunk.js"
   ]
 }
