@@ -35,7 +35,7 @@ class Application extends React.Component {
   }
 
   getApplications = (pageNumber) => {
-    let backendUrl = "https://api.cleancity.tj/api/get_apps";
+    let backendUrl = process.env.REACT_APP_BACKEND_API;
     if (pageNumber) { backendUrl = backendUrl + "?page=" + pageNumber }
 
     let urlString = window.location.href;

@@ -242,7 +242,7 @@ class AddEventDialog extends React.Component {
             this.setState({
                 loading: true
             })
-            Axios.post("https://api.cleancity.tj/api/create_app", formData).then(resp => {
+            Axios.post(process.env.REACT_APP_BACKEND_API + "/api/create_app", formData).then(resp => {
                 this.setState({
                     successToasterOpen: true
                 }, () => {
