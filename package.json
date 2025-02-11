@@ -25,7 +25,7 @@
     "react-js-pagination": "^3.0.3",
     "react-laravel-paginex": "^2.0.6",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.0",
+    "react-scripts": "5.0.1",
     "react-slick": "^0.26.1",
     "sass-loader": "^9.0.1",
     "slick-carousel": "^1.8.1",
